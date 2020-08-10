@@ -11,12 +11,12 @@ morse_blink_char:
     sw s2, 0(sp)
 
     mv s0, a0
-    srli s1, s0, 4
+    mv s1, a1
 next:
     li a0, 1
     jal set_led
     li a0, MORSE_UNIT_MS
-    andi s2, s0, 0x01
+    andi s2, s1, 0x01
     beqz s2, dot
     li a0, 3 * MORSE_UNIT_MS
 dot:
@@ -25,9 +25,9 @@ dot:
     jal set_led
     li a0, MORSE_UNIT_MS
     jal wait_ms
-    srli s0, s0, 1
-    addi s1, s1, -1
-    bnez s1, next
+    srli s1, s1, 1
+    addi s0, s0, -1
+    bnez s0, next
 
     li a0, 3 * MORSE_UNIT_MS
     jal wait_ms
