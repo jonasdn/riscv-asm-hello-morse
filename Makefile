@@ -12,7 +12,7 @@ EMU=elf32lriscv
 ARCHFLAGS=-march=rv32imac -mabi=ilp32
 CFLAGS=$(ARCHFLAGS) -g -o0
 LDFLAGS=-m $(EMU) -nostartfiles -nostdlib -Thello-morse.lds
-CC=riscv64-unknown-elf-gcc
+AS=riscv64-unknown-elf-as
 LD=riscv64-unknown-elf-ld
 OBJCOPY=riscv64-unknown-elf-objcopy
 
@@ -33,7 +33,7 @@ all: $(hex)
 # This is the rule to turn assembly files to object files
 #
 %.o: %.S
-	$(CC) $(CFLAGS)  -c -o $@ $<
+	$(AS) $(CFLAGS)  -c -o $@ $<
 #
 # We will use  ur object code to create an ELF executable
 #
