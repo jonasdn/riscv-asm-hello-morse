@@ -1,5 +1,5 @@
 # riscv-asm-hello-morse
-Blinking morse code on the hifive1-revb board using RISC-v assembler
+Blinking morse code on the hifive1-revb board using RISC-v assembly
 
 
 ## prerequisites
