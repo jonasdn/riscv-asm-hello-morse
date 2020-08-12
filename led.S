@@ -4,8 +4,8 @@
 .equ GPIO_RED,  0x400000    # Bit 22 out of 32 set: 0b00000000010000000000000000000000
                             # Bit 22 will correspond to GPIO 22, where the red led is connected
 
-.global init_led            # Make the init_led symbol global, so other (object) files can find it
-init_led:
+.global led_init            # Make the led_init symbol global, so other (object) files can find it
+led_init:
     li t0, GPIO_BASE        # li: load immediate: load the constant GPIO_BASE into t0
     li t1, GPIO_RED         # Load the constant GPIO_RED into t1
                             #
@@ -41,12 +41,12 @@ init_led:
 
     ret                     # Return to where ra register tells us
 
-.global set_led             # Make the set_led symbol global, so other (object) files can find it
+.global led_set             # Make the led_set symbol global, so other (object) files can find it
 #
 # Arguments:
 #   - a0: 0 if led is to be off and !0 if led is to be on
 #
-set_led:
+led_set:
     addi sp, sp, -16        # We start by adding room on the stack (pointed to by reg sp).
     sw s0, 4(sp)            # Then we store the s0 and s1 registers on the stack so that we are
     sw s1, 0(sp)            # not writing over values used by the caller of the function.

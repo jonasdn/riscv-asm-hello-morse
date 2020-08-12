@@ -2,7 +2,7 @@
 
 .global _start            # The default entry point of the text section (GNU ld will look for this)
 _start:
-    jal init_led          # jal: correctly set the return register (ra) and jump to init_led
+    jal led_init          # jal: correctly set the return register (ra) and jump to led_init
     la t0, morse_string   # Load the address of morse_string to t0 reg
 loop:
     lb t1, 0(t0)          # Load one byte from the address found in t0 at offset 0, store in t1

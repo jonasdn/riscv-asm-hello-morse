@@ -22,7 +22,7 @@ morse_blink_char:
     mv s1, a1                   # values in s0 and s1.
 next:
     li a0, 1                    # li: load immediate: load the constant 1 into a0
-    jal set_led                 # call set_led function (argument: 1)
+    jal led_set                 # call led_set function (argument: 1)
     li a0, MORSE_UNIT_MS        # load the constant MOSE_UNIT_MS into a0
     andi s2, s1, 0x01           # Use and to check if the LSB bit of s1 (morse pattern) is set
     beqz s2, dot                # If it is not, we have a dot (see hello-morse.S for details)
@@ -30,7 +30,7 @@ next:
 dot:
     jal wait_ms                 # a0 has MORSE_UNIT_MS or 3xMORSE_UNIT_MS, call wait_ms function
     li a0, 0                    # Load 0 into a0
-    jal set_led                 # Call set_led to turn led off after wait.
+    jal led_set                 # Call led_set to turn led off after wait.
     li a0, MORSE_UNIT_MS        # Load MORSE_UNIT_MS into a0
     jal wait_ms                 # Call wait_ms to wait a morse unit until next dit or dah.
 
